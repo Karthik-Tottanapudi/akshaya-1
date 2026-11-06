@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* Relationship TV Design System - Deep Space CRT Aesthetic */
+
+@layer base {
+  :root {
+    /* Space void background */
+    --background: 240 20% 2%;
+    --foreground: 150 80% 90%;
+
+    /* CRT Screen colors */
+    --crt-green: 150 100% 85%;
+    --crt-green-dim: 150 50% 15%;
+    --crt-glow: 150 100% 70%;
+    --crt-scanline: 150 30% 8%;
+
+    /* TV Body - Dark plastic */
+    --tv-body: 240 10% 7%;
+    --tv-body-highlight: 240 8% 12%;
+    --tv-body-shadow: 240 15% 3%;
+
+    /* Button states */
+    --button-default: 240 8% 18%;
+    --button-pressed: 240 12% 7%;
+    --button-hover: 240 8% 22%;
+
+    /* Space background */
+    --space-center: 260 80% 2%;
+    --space-edge: 0 0% 0%;
+    --star-color: 45 100% 95%;
+
+    /* Semantic mappings */
+    --card: 240 15% 5%;
+    --card-foreground: 150 80% 90%;
+
+    --popover: 240 15% 5%;
+    --popover-foreground: 150 80% 90%;
+
+    --primary: 150 100% 75%;
+    --primary-foreground: 240 20% 5%;
+
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 150 60% 80%;
+
+    --muted: 240 10% 10%;
+    --muted-foreground: 150 20% 50%;
+
+    --accent: 150 80% 60%;
+    --accent-foreground: 240 20% 5%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 15%;
+    --input: 240 10% 12%;
+    --ring: 150 100% 70%;
+
+    --radius: 0.5rem;
+
+    /* Animation durations */
+    --snap-duration: 420ms;
+    --button-press-duration: 150ms;
+    --increment-animation-duration: 1000ms;
+
+    /* Sidebar - space theme */
+    --sidebar-background: 240 15% 4%;
+    --sidebar-foreground: 150 60% 80%;
+    --sidebar-primary: 150 100% 70%;
+    --sidebar-primary-foreground: 240 20% 5%;
+    --sidebar-accent: 240 10% 10%;
+    --sidebar-accent-foreground: 150 60% 80%;
+    --sidebar-border: 240 10% 12%;
+    --sidebar-ring: 150 100% 70%;
+  }
+
+  .dark {
+    --background: 240 20% 2%;
+    --foreground: 150 80% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    touch-action: none;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  /* CRT Screen glow effect */
+  .crt-glow {
+    text-shadow: 
+      0 0 5px hsl(var(--crt-green)),
+      0 0 10px hsl(var(--crt-green) / 0.8),
+      0 0 20px hsl(var(--crt-green) / 0.6),
+      0 0 40px hsl(var(--crt-green) / 0.4);
+  }
+
+  /* Scanline overlay */
+  .scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--crt-scanline) / 0.1) 2px,
+      hsl(var(--crt-scanline) / 0.1) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* Space background gradient */
+  .space-bg {
+    background: radial-gradient(
+      ellipse at center,
+      hsl(var(--space-center)) 0%,
+      hsl(var(--space-edge)) 100%
+    );
+  }
+
+  /* Vignette effect */
+  .vignette {
+    box-shadow: inset 0 0 100px 20px hsl(0 0% 0% / 0.8);
+  }
+
+  /* Floating animation for +1 */
+  @keyframes float-up {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-40px) scale(0.8);
+    }
+  }
+
+  .animate-float-up {
+    animation: float-up var(--increment-animation-duration) ease-out forwards;
+  }
+
+  /* Star twinkle */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .animate-twinkle {
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  /* Button press effect */
+  @keyframes button-press {
+    0% { transform: translateZ(0); }
+    50% { transform: translateZ(-2px); }
+    100% { transform: translateZ(0); }
+  }
+}
